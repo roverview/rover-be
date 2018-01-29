@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static('./client'));
 
 app.get('*', (req, res) => {
-    res.sendFile ('index.html', { root: './client'});
+    res.json({ msg: 'placeholder - deployment worked!' });
 });
 
 app.listen(PORT, () => {
