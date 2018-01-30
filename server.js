@@ -7,8 +7,8 @@ const mps = require('make-promises-safe');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// const connectionString = process.env.DATABASE_URL;
-const connectionString = 'postgres://localhost:5432/roverview'; //change this!  it is currently set for local machines!!!
+const connectionString = process.env.DATABASE_URL;
+// const connectionString = 'postgres://localhost:5432/roverview'; //change this!  it is currently set for local machines!!!
 const client = new pg.Client(connectionString);
 client.connect();
 
