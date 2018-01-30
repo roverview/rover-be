@@ -37,22 +37,23 @@ app.post('/db/users', (res,req) => {
     })
 });
 
-app.post('/db/image', (res,req) => {
-    client.query(`INSERT INTO image (rover_name, camera_name, earth_date, image_src, user_id)
-    VALUES($1, $2, $3, $4, $5);`,
-    [
-        //NEED Inputs from Melanie
-        // req.body.
-    ]
-)
-    .then(function(data) {
-        console.log('Username data passed: ', data);
-        res.send('request complete');
-    })
-    .catch(function(err) {
-        console.error(err);
-    })
-});
+//NEED INPUTS FROM MELANIE!!!!
+// app.post('/db/image', (res,req) => {
+//     client.query(`INSERT INTO image (rover_name, camera_name, earth_date, image_src, user_id)
+//     VALUES($1, $2, $3, $4, $5);`,
+//     [
+//         
+//          req.body.????????
+//     ]
+// )
+//     .then(function(data) {
+//         console.log('Username data passed: ', data);
+//         res.send('request complete');
+//     })
+//     .catch(function(err) {
+//         console.error(err);
+//     })
+// });
 
 
 app.get('/db/users', (req, res) => {
@@ -69,7 +70,7 @@ app.get('/db/users', (req, res) => {
 //the image data base is not properly set up!!!!!(we might need to REFACTOR and create a JOIN to connect the users favorites)
 app.get('/db/image', function(req, res) {
     client.query(`
-        SELECT id, name, image_id, image_src 
+        SELECT id, name, image_id, rover_name, camera_name, earth_date, image_src 
         FROM users
             JOIN image
             ON users.id = image.user_id;
