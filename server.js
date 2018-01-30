@@ -21,6 +21,40 @@ app.get('*', (req, res) => {
     console.log('file sent line 21');
 });
 
+app.post('/db/users', (res,req) => {
+    client.query(`INSERT INTO users (username)
+    VALUES($1);`,
+    [
+        req.body.username
+    ]
+)
+    .then(function(data) {
+        console.log('Username data passed: ', data);
+        res.send('request complete');
+    })
+    .catch(function(err) {
+        console.error(err);
+    })
+});
+
+app.post('/db/image', (res,req) => {
+    client.query(`INSERT INTO image (rover_name, camera_name, earth_date, image_src, user_id)
+    VALUES($1, $2, $3, $4, $5);`,
+    [
+        //NEED Inputs from Melanie
+        // req.body.
+    ]
+)
+    .then(function(data) {
+        console.log('Username data passed: ', data);
+        res.send('request complete');
+    })
+    .catch(function(err) {
+        console.error(err);
+    })
+});
+
+
 app.get('/db/users', (req, res) => {
     client.query(`SELECT * FROM users;`)
     .then(function(data) {
@@ -49,14 +83,12 @@ app.get('/db/image', function(req, res) {
     });
 });
 
-//=================================================
 
 function createUsersTable() {
     client.query(`
         CREATE TABLE IF NOT EXISTS users(
             id SERIAL PRIMARY KEY,
             username VARCHAR (256),
-            passphrase VARCHAR (256)
         );`
     )
     .then(function(res) { // changed to res instead of response for consistency
