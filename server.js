@@ -8,16 +8,16 @@ const PORT = process.env.PORT || 3000;
 
  app.use(express.static('./client'));
 
- app.get('*', function(req, res) {
-     console.log('recieved request');
-    //res.sendFile('index.html', {root: './client'});
+ app.get('*', (req, res) => {
+    console.log('received request');
+    res.sendFile('index.html', {root: './client'});
     res.json({ msg: 'placeholder - deployment worked!' });
     console.log('file sent');
 });
 
 
 
-app.get('/db/user', function(req, res) {
+app.get('/db/user', (req, res) => {
     client.query(`SELECT * FROM user;`)
     .then(function(data) {
         res.send(data);
