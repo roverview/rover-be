@@ -3,16 +3,22 @@
 const express = require('express');
 const pg = require('pg');
 const mps = require('make-promises-safe');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
-const connectionString = process.env.DATABASE_URL;
-// const connectionString = 'postgres://localhost:5432/roverview'; //change this!  it is currently set for local machines!!!
+// const connectionString = process.env.DATABASE_URL;
+const connectionString = 'postgres://localhost:5432/roverview';
 const client = new pg.Client(connectionString);
 client.connect();
 
+app.use(cors());
 // app.use(express.static('./client'));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('*', (req, res) => {
     console.log('received request line 18');
@@ -22,19 +28,20 @@ app.get('*', (req, res) => {
 });
 
 app.post('/db/users', (res,req) => {
-    client.query(`INSERT INTO users (username)
-    VALUES($1);`,
-    [
-        req.body.username
-    ]
-)
-    .then(function(data) {
-        console.log('Username data passed: ', data);
-        res.send('request complete');
-    })
-    .catch(function(err) {
-        console.error(err);
-    })
+//     client.query(`INSERT INTO users (username)
+//     VALUES($1);`,
+//     [
+//         req.body.username
+//     ]
+// )
+//     .then(function(data) {
+//         console.log('Username data passed: ', data);
+//         res.send('request complete');
+//     })
+//     .catch(function(err) {
+//         console.error(err);
+//     })
+    console.log(req.body)
 });
 
 
