@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 
  app.get('*', function(req, res) {
      console.log('recieved request');
-    res.sendFile('index.html', {root: './client'});
+    //res.sendFile('index.html', {root: './client'});
     res.json({ msg: 'placeholder - deployment worked!' });
     console.log('file sent');
 });
