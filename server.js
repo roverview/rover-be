@@ -20,12 +20,12 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('*', (req, res) => {
-    console.log('received request line 18');
-    res.sendFile('index.html', {root: './client'});
-    res.json({ msg: 'placeholder - deployment worked!' });
-    console.log('file sent line 21');
-});
+// app.get('*', (req, res) => {
+//     console.log('received request line 18');
+//     res.sendFile('index.html', {root: './client'});
+//     res.json({ msg: 'went to the wrong page!!!!!!  ******' });
+//     console.log('file sent line 21 on server.js');
+// });
 
 app.post('/db/users', (req, res) => {
     console.log('req.body',req.body);
@@ -68,9 +68,10 @@ app.post('/db/image', (req, res) => {
 
 
 app.get('/db/users/:username', (req, res) => {
-    client.query(`SELECT * FROM users WHERE username = ${req.params.username};`)
+    console.log('params', req.params.username);
+    client.query(`SELECT * FROM users WHERE username = '${req.params.username}';`)
     .then(function(data) {
-        console.log('db/users route hit, sent users data!')
+        console.log('db/users route hit, sent users data!', data);
         res.send(data);
     })
     .catch(function(err) {
