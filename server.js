@@ -79,15 +79,14 @@ app.get('/db/users/:username', (req, res) => {
     });
 });
 
-//the image data base is not properly set up!!!!!(we might need to REFACTOR and create a JOIN to connect the users favorites)
-app.get('/db/image/:user_id', function(req, res) {
+app.get('/db/image/:user_id', (req, res) => {
+    console.log('params',req.params.user_id)
     client.query(`
         SELECT id, username, image_id, rover_name, camera_name, earth_date, image_src 
         FROM users
             LEFT JOIN image
-            ON users.id = image.user_id
-            WHERE user_id = ${req.params.user_id};
-
+            ON users.id::varchar = image.user_id
+            WHERE user_id = '${req.params.user_id}';
     `)
     .then(function(data) {
         res.send(data);
