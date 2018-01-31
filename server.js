@@ -27,25 +27,26 @@ app.get('*', (req, res) => {
     console.log('file sent line 21');
 });
 
-app.post('/db/users', (res,req) => {
-//     client.query(`INSERT INTO users (username)
-//     VALUES($1);`,
-//     [
-//         req.body.username
-//     ]
-// )
-//     .then(function(data) {
-//         console.log('Username data passed: ', data);
-//         res.send('request complete');
-//     })
-//     .catch(function(err) {
-//         console.error(err);
-//     })
-    console.log(req.body)
+app.post('/db/users', (req, res) => {
+    console.log('req.body',req.body);
+    console.log('req.body.user',req.body.user);
+    client.query(`INSERT INTO users (username)
+    VALUES($1);`,
+    [
+        req.body.user
+    ]
+)
+    .then(function(data) {
+        console.log('Username data passed: ', data);
+        res.send('request complete');
+    })
+    .catch(function(err) {
+        console.error(err);
+    })
 });
 
 
-app.post('/db/image', (res,req) => {
+app.post('/db/image', (req, res) => {
     client.query(`INSERT INTO image (rover_name, camera_name, earth_date, image_src, user_id)
     VALUES($1, $2, $3, $4, $5);`,
     [
