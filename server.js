@@ -46,7 +46,7 @@ app.post('/db/users', (req, res) => {
 });
 
 
-app.post('/db/image', (res,req) => {
+app.post('/db/image', (req, res) => {
     client.query(`INSERT INTO image (rover_name, camera_name, earth_date, image_src, user_id)
     VALUES($1, $2, $3, $4, $5);`,
     [
