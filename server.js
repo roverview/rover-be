@@ -51,10 +51,10 @@ app.post('/db/image', (req, res) => {
     VALUES($1, $2, $3, $4, $5);`,
     [
          req.body.rover_name,
-         camera_name,
-         earth_date,
-         image_src,
-         user_id,
+         req.body.camera_name,
+         req.body.earth_date,
+         req.body.image_src,
+         req.body.user_id,
     ]
 )
     .then(function(data) {
