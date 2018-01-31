@@ -97,6 +97,23 @@ app.get('/db/image/:user_id', (req, res) => {
     });
 });
 
+app.delete('/db/image/:user_id/:image_id', (req, res) => {
+    console.log('Deleted picture user id', req.params.user_id)
+    console.log('Deleted picture image id', req.params.image_id)
+
+    client.query(`
+        DELETE FROM image WHERE image_id = ${req.params.image_id} AND user_id = '${req.params.user_id}';
+    `)
+    .then(() => {
+        res.send(`deleted favorite photo from user ${req.params.user_id} , image id: ${req.params.image_id}`);
+        console.log('deleted a favorite picture');
+    }
+)
+
+
+});
+
+
 
 function createUsersTable() {
     client.query(`
