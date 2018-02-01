@@ -7,10 +7,10 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT;
 
-// const connectionString = process.env.DATABASE_URL;
-const connectionString = 'postgres://localhost:5432/roverview';
+const connectionString = process.env.DATABASE_URL;
+// const connectionString = 'postgres://localhost:5432/roverview';
 const client = new pg.Client(connectionString);
 client.connect();
 
@@ -19,13 +19,6 @@ app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// app.get('*', (req, res) => {
-//     console.log('received request line 18');
-//     res.sendFile('index.html', {root: './client'});
-//     res.json({ msg: 'went to the wrong page!!!!!!  ******' });
-//     console.log('file sent line 21 on server.js');
-// });
 
 app.post('/db/users', (req, res) => {
     console.log('req.body',req.body);
